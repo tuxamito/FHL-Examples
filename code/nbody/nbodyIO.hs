@@ -12,10 +12,10 @@ data Triple = Triple { x :: Float, y :: Float, z :: Float }
 tripleNull = Triple 0 0 0
 
 tripleShow :: Triple -> String
-tripleShow t = "(" ++ (show (x t)) ++ "," ++ (show (y t)) ++ "," ++ (show (z t)) ++ ")"
+tripleShow t = (show (x t)) ++ " " ++ (show (y t)) ++ " " ++ (show (z t))
 
 _ta :: String -> Triple -> String
-_ta s t = s ++ " " ++ tripleShow(t)
+_ta s t = s ++ tripleShow(t) ++ "\n"
 
 tripleListShow :: [Triple] -> String
 tripleListShow l = foldl _ta "" l 
@@ -104,19 +104,25 @@ splits :: (String -> [Float]) -> [String] -> [[Float]]
 splits func ss = map func ss
 
 main = do
+  rtime <- getCurrentTime
   x <- readFile "pos.csv"
   y <- readFile "vel.csv"
   let iposs = splits commaSplit (splitOn "\n" x)
   let ivels = splits commaSplit (splitOn "\n" y)
-  -- iposs `deepseq` ivels `deepseq` print "START"
-  print "START"
+  iposs `deepseq` ivels `deepseq` putStrLn "START"
+  -- print "START"
   stime <- getCurrentTime
-  print stime
+  --print stime
 
-  let result = tripleListShow (loop (generateTList(iposs), generateTList(ivels)) 2)
+  let result = tripleListShow (loop (generateTList(iposs), generateTList(ivels)) 16)
   etime <- result `deepseq` getCurrentTime
 
-  print result
-  print "STOP"
+  putStr result
+
+  ptime <- getCurrentTime
+
+  putStrLn "STOP"
+  print rtime
   print stime
   print etime
+  print ptime

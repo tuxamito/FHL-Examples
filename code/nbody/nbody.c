@@ -125,7 +125,7 @@ int countLines(char* file) {
 int main(const int argc, const char** argv) { 
   int nBodies;
   const float dt   = 0.1; // time step
-  const int nIters = 2;  // simulation iterations
+  const int nIters = 30;  // simulation iterations
 
 
   char* posstr = readFile("pos.csv");
