@@ -4,8 +4,6 @@
 -- import Text.ParserCombinators.Parsec
 -- import Data.CSV
 -- import System.IO
-import GHC.Prim
-import GHC.Profiling
 import Data.List
 import Data.List.Split
 import Data.Time
